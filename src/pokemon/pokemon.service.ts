@@ -24,8 +24,13 @@ export class PokemonService {
     }
   }
 
-  findAll() {
-    return `This action returns all pokemon`;
+  async findAll() {
+    try {
+      const data = await this.pokemonModel.find();
+      return data;
+    } catch (error) {
+      throw new InternalServerErrorException(`${error}`);
+    }
   }
 
   async findOne(id: string) {
